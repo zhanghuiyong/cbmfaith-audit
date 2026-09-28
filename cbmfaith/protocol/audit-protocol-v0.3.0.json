@@ -1,0 +1,22 @@
+{
+  "protocol_id": "cbmfaith-reference-audit",
+  "protocol_version": "0.3.0",
+  "status": "fixed-reference-protocol",
+  "causal_scope": "observable model behavior unless separate identification assumptions are supplied",
+  "required_design": [
+    "freeze cohort split before model fitting",
+    "keep repeated biological units in one partition",
+    "use matched inputs, concepts, outcomes, folds, and selection budgets",
+    "export combined and identifiable route-only predictions",
+    "fit leakage decoders out of sample"
+  ],
+  "required_metrics": [
+    "combined diagnosis AUROC, AUPRC, and Brier score",
+    "concept-route and residual-route diagnosis where identifiable",
+    "semantic concept recovery where labels exist",
+    "route reliance with explicit gauge qualification",
+    "model-level concept replacement response where supported"
+  ],
+  "replication_unit_rule": "Report uncertainty at the independent biological or training-seed level; folds are blocks, not independent replicates.",
+  "schema_resource": "cbmfaith/schema/benchmark-output.schema.json"
+}

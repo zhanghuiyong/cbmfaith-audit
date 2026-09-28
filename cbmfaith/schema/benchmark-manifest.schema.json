@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://w3id.org/cbmfaith/schema/benchmark-manifest-v0.3.0.json",
+  "title": "CBMFaith machine-readable benchmark manifest",
+  "type": "object",
+  "required": ["benchmark_version", "status", "generated_on", "experiments", "artifacts"],
+  "properties": {
+    "benchmark_version": {"const": "0.3.0"},
+    "status": {"const": "reference-benchmark"},
+    "generated_on": {"type": "string", "format": "date"},
+    "paper_update_policy": {"type": "string"},
+    "experiments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["experiment_id", "gate_passed", "manuscript_update_allowed", "scope"],
+        "properties": {
+          "experiment_id": {"type": "string"},
+          "gate_passed": {"type": "boolean"},
+          "manuscript_update_allowed": {"type": "boolean"},
+          "scope": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["artifact_id", "relative_path", "sha256", "bytes", "media_type"],
+        "properties": {
+          "artifact_id": {"type": "string"},
+          "relative_path": {"type": "string"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "bytes": {"type": "integer", "minimum": 1},
+          "media_type": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cbmfaith-audit"
+version = "0.3.1"
+description = "Observable faithfulness audits for concept bottleneck models"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  {name = "Huiyong Zhang"},
+  {name = "Xiao Li"},
+  {name = "Jicheng Yao"},
+  {name = "Xiaoshu Zhu"},
+  {name = "Fubo Wang"}
+]
+keywords = ["concept bottleneck models", "explainable AI", "model auditing", "medical AI"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only"
+]
+dependencies = ["numpy>=1.24", "pandas>=2.0", "scipy>=1.10", "scikit-learn>=1.3", "jsonschema>=4.20"]
+
+[project.urls]
+Repository = "https://github.com/zhanghuiyong/cbmfaith-audit"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "jsonschema>=4.20", "ruff>=0.6", "build>=1.2"]
+
+[project.scripts]
+cbmfaith = "cbmfaith.cli:main"
+cbmfaith-validate = "cbmfaith.validation:main"
+
+[tool.setuptools]
+packages = ["cbmfaith", "cbmfaith.protocol", "cbmfaith.schema"]
+
+[tool.setuptools.package-data]
+cbmfaith = ["schema/*.json", "protocol/*.md", "protocol/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["cbmfaith/tests"]
+
+[tool.ruff]
+line-length = 110

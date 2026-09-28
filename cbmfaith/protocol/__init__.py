@@ -1,0 +1,1 @@
+"""Versioned CBMFaith protocol resources."""

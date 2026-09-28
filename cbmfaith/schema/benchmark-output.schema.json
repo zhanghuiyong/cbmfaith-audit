@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://w3id.org/cbmfaith/schema/benchmark-output-v0.3.0.json",
+  "title": "CBM Faithfulness reference audit output",
+  "type": "object",
+  "required": ["schema_version", "combined_diagnosis", "causal_scope"],
+  "properties": {
+    "schema_version": {"const": "0.3.0"},
+    "causal_scope": {"type": "string", "minLength": 1},
+    "combined_diagnosis": {"$ref": "#/$defs/diagnostic"},
+    "concept_route_diagnosis": {"$ref": "#/$defs/diagnostic"},
+    "residual_route_diagnosis": {"$ref": "#/$defs/diagnostic"},
+    "semantic_recovery": {"type": "object"},
+    "residual_reliance": {"$ref": "#/$defs/routeReliance"},
+    "residual_reliance_gauge_fixed": {"$ref": "#/$defs/routeReliance"},
+    "label_replacement": {"type": "object"},
+    "operational_completeness": {"type": "object"},
+    "residual_concept_decodability": {"type": "object"}
+  },
+  "$defs": {
+    "diagnostic": {
+      "type": "object",
+      "required": ["n", "positives", "auroc", "auprc", "brier"],
+      "properties": {
+        "n": {"type": "integer", "minimum": 1},
+        "positives": {"type": "integer", "minimum": 0},
+        "auroc": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "auprc": {"type": "number", "minimum": 0, "maximum": 1},
+        "brier": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": true
+    },
+    "routeReliance": {
+      "type": "object",
+      "required": [
+        "definition", "normalized_residual_share_mean",
+        "normalized_residual_share_median", "residual_dominant_fraction",
+        "combined_residual_spearman"
+      ],
+      "properties": {
+        "definition": {"type": "string"},
+        "normalized_residual_share_mean": {"type": "number", "minimum": 0, "maximum": 1},
+        "normalized_residual_share_median": {"type": "number", "minimum": 0, "maximum": 1},
+        "residual_dominant_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "combined_residual_spearman": {"type": ["number", "null"], "minimum": -1, "maximum": 1},
+        "gauge": {"type": "object"}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
